@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.eslab_final_impromptu.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
+    private val viewModel: PianoViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
@@ -22,6 +24,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.connect.setOnClickListener {
+            SocketHandler.setSocket()
+            SocketHandler.establishConnection()
             val action =
                 HomeFragmentDirections.actionHomeFragmentToDetailFragment()
             this.findNavController().navigate(action)
