@@ -6,9 +6,19 @@
     tools:context=".SettingFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <Switch
+        android:id="@+id/pitchSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:showText="true"
+        android:text="@string/pitchSwitching"
+        android:textOff="@string/off"
+        android:textOn="@string/on"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:thumb="@drawable/switchthumb"
+        android:track="@drawable/switchtrack" />
 
 </FrameLayout>

@@ -23,8 +23,6 @@ object SocketHandler {
     lateinit var client:Socket
     @Volatile
     private var connectionState=false
-    @Volatile
-    private var pitchSwitching=true
     @Synchronized
     fun setSocket() {
         try {
