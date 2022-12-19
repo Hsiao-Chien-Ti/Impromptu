@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/detailFragment"
+            app:popUpTo="@+id/nav_graph.xml"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -23,9 +25,6 @@
             android:id="@+id/action_detailFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
         <action
-            android:id="@+id/action_detailFragment_to_sheetFragment"
-            app:destination="@id/sheetFragment" />
-        <action
             android:id="@+id/action_detailFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
@@ -34,9 +33,4 @@
         android:name="com.example.eslab_final_impromptu.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
-    <fragment
-        android:id="@+id/sheetFragment"
-        android:name="com.example.eslab_final_impromptu.SheetFragment"
-        android:label="fragment_sheet"
-        tools:layout="@layout/fragment_sheet" />
 </navigation>

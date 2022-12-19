@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.eslab_final_impromptu"
-        minSdkVersion 19
+        minSdkVersion 26
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
@@ -34,6 +34,13 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    sourceSets {
+        main {
+            res {
+                srcDirs 'src\\main\\res', 'src\\main\\res\\raw'
+            }
+        }
+    }
 }
 
 dependencies {
@@ -55,4 +62,5 @@ dependencies {
     implementation ('io.socket:socket.io-client:2.0.0') {
         exclude group: 'org.json', module: 'json'
     }
+    implementation 'com.github.AsynctaskCoffee:VoiceRecorder:beta-0.5'
 }

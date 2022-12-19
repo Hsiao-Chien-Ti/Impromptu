@@ -24,8 +24,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.connect.setOnClickListener {
-            SocketHandler.setSocket()
-            SocketHandler.establishConnection()
+            SocketHandler.acceptSocket()
+//            SocketHandler.establishConnection()
             val action =
                 HomeFragmentDirections.actionHomeFragmentToDetailFragment()
             this.findNavController().navigate(action)
