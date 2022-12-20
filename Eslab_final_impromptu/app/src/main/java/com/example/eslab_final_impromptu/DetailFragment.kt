@@ -3,6 +3,7 @@ package com.example.eslab_final_impromptu
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.media.MediaRecorder
 import android.media.SoundPool
 import android.os.Bundle
@@ -76,7 +77,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.nowPlaying.text="Now Playing\n"+note[row]
+//        binding.nowPlaying.text="Now Playing\n"+note[row]
         if(!SettingVariables.instanceExist)
         {
             SettingVariables.instanceExist=true
@@ -92,9 +93,9 @@ class DetailFragment : Fragment() {
                 row=2
 //
                 var prevData="0 0 0 0 0 0 0"
-                runOnUiThread{
-                    binding.nowPlaying.text="Now Playing\n"+note[row]
-                }
+//                runOnUiThread{
+//                    binding.nowPlaying.text="Now Playing\n"+note[row]
+//                }
                 while(true)
                 {
                     if(!socketConnect)
@@ -114,19 +115,47 @@ class DetailFragment : Fragment() {
                             soundPool.stop(sound[row][i/2])
                         }
                     }
+                    if(data[0]=='1')
+                        runOnUiThread { binding.np1.setTextColor(resources.getColor(R.color.blue))}
+                    else
+                        runOnUiThread { binding.np1.setTextColor(resources.getColor(R.color.vblack)) }
+                    if(data[2]=='1')
+                        runOnUiThread { binding.np2.setTextColor(resources.getColor(R.color.blue))}
+                    else
+                        runOnUiThread { binding.np2.setTextColor(resources.getColor(R.color.vblack)) }
+                    if(data[4]=='1')
+                        runOnUiThread { binding.np3.setTextColor(resources.getColor(R.color.blue))}
+                    else
+                        runOnUiThread { binding.np3.setTextColor(resources.getColor(R.color.vblack)) }
+                    if(data[6]=='1')
+                        runOnUiThread { binding.np4.setTextColor(resources.getColor(R.color.blue))}
+                    else
+                        runOnUiThread { binding.np4.setTextColor(resources.getColor(R.color.vblack)) }
+                    if(data[8]=='1')
+                        runOnUiThread { binding.np5.setTextColor(resources.getColor(R.color.blue))}
+                    else
+                        runOnUiThread { binding.np5.setTextColor(resources.getColor(R.color.vblack)) }
                     if(data.length>1&&SettingVariables.pitchSwitching) {
                         if(data[10]=='1'&&row<4)
                         {
                             row += 1
                             runOnUiThread{
-                                binding.nowPlaying.text="Now Playing\n"+note[row]
+                                binding.np1.text=note[row][0]
+                                binding.np2.text=note[row][1]
+                                binding.np3.text=note[row][2]
+                                binding.np4.text=note[row][3]
+                                binding.np5.text=note[row][4]
                             }
                         }
                         else if(data[10]=='2'&&row>0)
                         {
                             row -=1
                             runOnUiThread{
-                                binding.nowPlaying.text="Now Playing\n"+note[row]
+                                binding.np1.text=note[row][0]
+                                binding.np2.text=note[row][1]
+                                binding.np3.text=note[row][2]
+                                binding.np4.text=note[row][3]
+                                binding.np5.text=note[row][4]
                             }
                         }
                     }
