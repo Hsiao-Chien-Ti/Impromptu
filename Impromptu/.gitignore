@@ -20,3 +20,4 @@ BUILD
 COMPONENT_ism43362
 mbed-os
 BSP_B-L475E-IOT01
+mbed-dsp
