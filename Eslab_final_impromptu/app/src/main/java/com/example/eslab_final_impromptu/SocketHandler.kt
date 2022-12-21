@@ -51,7 +51,7 @@ object SocketHandler {
                         break
                     rcvData=input.readLine()+" "+cnt.toString()
                     println(rcvData)
-                    sleep(100)
+                    sleep(160)
                     cnt++
                 }
 

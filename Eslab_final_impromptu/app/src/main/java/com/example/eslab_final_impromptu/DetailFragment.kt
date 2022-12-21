@@ -159,7 +159,7 @@ class DetailFragment : Fragment() {
                             }
                         }
                     }
-                    Thread.sleep(100)
+                    Thread.sleep(160)
                     prevData=data
 //
 
