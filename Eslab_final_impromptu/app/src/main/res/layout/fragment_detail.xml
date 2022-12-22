@@ -13,7 +13,7 @@
             android:id="@+id/nowPlaying"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nowPlaying"
+            android:text="@string/notPlaying"
             android:textSize="32dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/record"
@@ -28,7 +28,8 @@
             app:layout_constraintEnd_toStartOf="@id/np2"
             app:layout_constraintStart_toStartOf="parent"
                 android:text="C3"
-            android:textSize="32dp"/>
+            android:textSize="32dp"
+            android:visibility="invisible"/>
         <TextView android:id="@+id/np2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,7 +39,8 @@
             app:layout_constraintStart_toEndOf="@id/np1"
             app:layout_constraintEnd_toStartOf="@id/np3"
             android:textSize="32dp"
-            android:text="D3" />
+            android:text="D3"
+            android:visibility="invisible"/>
         <TextView android:id="@+id/np3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,7 +50,8 @@
             app:layout_constraintStart_toEndOf="@id/np2"
             app:layout_constraintEnd_toStartOf="@id/np4"
             android:textSize="32dp"
-            android:text="E3" />
+            android:text="E3"
+            android:visibility="invisible"/>
         <TextView android:id="@+id/np4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,7 +61,8 @@
             app:layout_constraintStart_toEndOf="@id/np3"
             app:layout_constraintEnd_toStartOf="@id/np5"
             android:textSize="32dp"
-            android:text="F3" />
+            android:text="F3"
+            android:visibility="invisible"/>
         <TextView android:id="@+id/np5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,14 +72,24 @@
             app:layout_constraintStart_toEndOf="@id/np4"
             app:layout_constraintEnd_toEndOf="parent"
             android:textSize="32dp"
+            android:visibility="invisible"
             android:text="G3" />
         <Button
             android:id="@+id/record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/record"
-            app:layout_constraintTop_toTopOf="@id/nowPlaying"
-            app:layout_constraintBottom_toTopOf="@+id/settings"
+            app:layout_constraintTop_toBottomOf="@id/nowPlaying"
+            app:layout_constraintBottom_toTopOf="@+id/sheet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <Button
+            android:id="@+id/sheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sheet"
+            app:layout_constraintBottom_toTopOf="@id/settings"
+            app:layout_constraintTop_toBottomOf="@+id/record"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
         <Button
@@ -83,8 +97,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/settings"
-            app:layout_constraintBottom_toBottomOf="@id/disconnect"
-            app:layout_constraintTop_toBottomOf="@+id/record"
+            app:layout_constraintBottom_toTopOf="@id/disconnect"
+            app:layout_constraintTop_toBottomOf="@+id/sheet"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
         <Button

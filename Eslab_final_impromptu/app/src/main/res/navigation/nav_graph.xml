@@ -27,10 +27,18 @@
         <action
             android:id="@+id/action_detailFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_sheetFragment"
+            app:destination="@id/sheetFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.example.eslab_final_impromptu.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/sheetFragment"
+        android:name="com.example.eslab_final_impromptu.SheetFragment"
+        android:label="fragment_sheet"
+        tools:layout="@layout/fragment_sheet" />
 </navigation>

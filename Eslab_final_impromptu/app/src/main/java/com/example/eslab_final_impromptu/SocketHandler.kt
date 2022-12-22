@@ -38,6 +38,7 @@ object SocketHandler {
             try {
                 Log.w("e","create socket")
                 client = mSocket.accept()
+                SettingVariables.connected=true
                 Log.w("e","accept")
                 connectionState=true
                 output = PrintWriter(client.getOutputStream(), true)
@@ -77,6 +78,7 @@ object SocketHandler {
         {
             connectionState=false
             client.close()
+            rcvData=""
         }
 
     }

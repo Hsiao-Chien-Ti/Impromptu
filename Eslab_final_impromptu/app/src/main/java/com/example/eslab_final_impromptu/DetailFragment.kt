@@ -12,6 +12,8 @@ import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -96,6 +98,7 @@ class DetailFragment : Fragment() {
 //                runOnUiThread{
 //                    binding.nowPlaying.text="Now Playing\n"+note[row]
 //                }
+
                 while(true)
                 {
                     if(!socketConnect)
@@ -103,8 +106,35 @@ class DetailFragment : Fragment() {
                         break
                     }
                     val data=SocketHandler.readData()
-                    if(data==prevData||data.length<=10)
+                    if(data==prevData)
                         continue
+                    if(data.length<=10)
+                    {
+                        runOnUiThread {
+                            binding.nowPlaying.text="Not playing"
+                            binding.np1.visibility=INVISIBLE
+                            binding.np2.visibility=INVISIBLE
+                            binding.np3.visibility=INVISIBLE
+                            binding.np4.visibility=INVISIBLE
+                            binding.np5.visibility=INVISIBLE
+                        }
+                        continue
+                    }
+                    else{
+                        runOnUiThread {
+                            if(binding.nowPlaying.text!="Now playing")
+                            {
+                                binding.nowPlaying.text="Now playing"
+                                binding.np1.visibility=VISIBLE
+                                binding.np2.visibility=VISIBLE
+                                binding.np3.visibility=VISIBLE
+                                binding.np4.visibility=VISIBLE
+                                binding.np5.visibility=VISIBLE
+                            }
+                        }
+                    }
+
+
                     for(i in 0..8){
                         if(data[i]=='1'&&data[i]!=prevData[i])
                         {
@@ -190,6 +220,11 @@ class DetailFragment : Fragment() {
                 stopRecord()
                 binding.record.text="Record"
             }
+        }
+        binding.sheet.setOnClickListener{
+            val action =
+                DetailFragmentDirections.actionDetailFragmentToSheetFragment()
+            this.findNavController().navigate(action)
         }
     }
 

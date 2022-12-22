@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.eslab_final_impromptu.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
-    private val viewModel: PianoViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
