@@ -24,6 +24,7 @@ import com.example.eslab_final_impromptu.SettingVariables.note
 import com.example.eslab_final_impromptu.SettingVariables.row
 import com.example.eslab_final_impromptu.databinding.FragmentDetailBinding
 import java.io.IOException
+import java.security.spec.MGF1ParameterSpec
 import java.time.LocalDateTime
 
 
@@ -38,6 +39,13 @@ class DetailFragment : Fragment() {
     private var isRecordable=true
     @Volatile
     private var socketConnect=true
+    @Volatile
+    private lateinit var sound0:Array<Int>
+    private lateinit var sound1:Array<Int>
+    private lateinit var sound2:Array<Int>
+    private lateinit var sound3:Array<Int>
+    private lateinit var sound4:Array<Int>
+    private lateinit var sound:Array<Array<Int>>
     private val requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission())
             { isGranted: Boolean ->
@@ -74,6 +82,12 @@ class DetailFragment : Fragment() {
             Log.d("ddddd","audio")
             requestPermission.launch(Manifest.permission.RECORD_AUDIO)
         }
+        sound0=arrayOf(soundPool.load(requireContext(), R.raw.c0, 1),soundPool.load(requireContext(), R.raw.d0, 1),soundPool.load(requireContext(), R.raw.e0, 1),soundPool.load(requireContext(), R.raw.f0, 1),soundPool.load(requireContext(), R.raw.g0, 1))
+        sound1=arrayOf(soundPool.load(requireContext(), R.raw.a0, 1),soundPool.load(requireContext(), R.raw.b0, 1),soundPool.load(requireContext(), R.raw.c1, 1),soundPool.load(requireContext(), R.raw.d1, 1),soundPool.load(requireContext(), R.raw.e1, 1))
+        sound2=arrayOf(soundPool.load(requireContext(), R.raw.f1, 1),soundPool.load(requireContext(), R.raw.g1, 1),soundPool.load(requireContext(), R.raw.a1, 1),soundPool.load(requireContext(), R.raw.b1, 1),soundPool.load(requireContext(), R.raw.c2, 1))
+        sound3=arrayOf(soundPool.load(requireContext(), R.raw.e_1, 1),soundPool.load(requireContext(), R.raw.f_1, 1),soundPool.load(requireContext(), R.raw.g_1, 1),soundPool.load(requireContext(), R.raw.a_1, 1),soundPool.load(requireContext(), R.raw.b_1, 1))
+        sound4=arrayOf(soundPool.load(requireContext(), R.raw.g_2, 1),soundPool.load(requireContext(), R.raw.a_2, 1),soundPool.load(requireContext(), R.raw.b_2, 1),soundPool.load(requireContext(), R.raw.c_1, 1),soundPool.load(requireContext(), R.raw.d_1, 1))
+        sound= arrayOf(sound4,sound3,sound0,sound1,sound2)
         return binding.root
     }
 
@@ -84,14 +98,6 @@ class DetailFragment : Fragment() {
         {
             SettingVariables.instanceExist=true
             Thread {
-                var sound0=arrayOf(soundPool.load(requireContext(), R.raw.c0, 1),soundPool.load(requireContext(), R.raw.d0, 1),soundPool.load(requireContext(), R.raw.e0, 1),soundPool.load(requireContext(), R.raw.f0, 1),soundPool.load(requireContext(), R.raw.g0, 1))
-                var sound1=arrayOf(soundPool.load(requireContext(), R.raw.a0, 1),soundPool.load(requireContext(), R.raw.b0, 1),soundPool.load(requireContext(), R.raw.c1, 1),soundPool.load(requireContext(), R.raw.d1, 1),soundPool.load(requireContext(), R.raw.e1, 1))
-                var sound2=arrayOf(soundPool.load(requireContext(), R.raw.f1, 1),soundPool.load(requireContext(), R.raw.g1, 1),soundPool.load(requireContext(), R.raw.a1, 1),soundPool.load(requireContext(), R.raw.b1, 1),soundPool.load(requireContext(), R.raw.c2, 1))
-                var sound3=arrayOf(soundPool.load(requireContext(), R.raw.e_1, 1),soundPool.load(requireContext(), R.raw.f_1, 1),soundPool.load(requireContext(), R.raw.g_1, 1),soundPool.load(requireContext(), R.raw.a_1, 1),soundPool.load(requireContext(), R.raw.b_1, 1))
-                var sound4=arrayOf(soundPool.load(requireContext(), R.raw.g_2, 1),soundPool.load(requireContext(), R.raw.a_2, 1),soundPool.load(requireContext(), R.raw.b_2, 1),soundPool.load(requireContext(), R.raw.c_1, 1),soundPool.load(requireContext(), R.raw.d_1, 1))
-//            var sound5=arrayOf(soundPool.load(requireContext(), R.raw.c_2, 1),soundPool.load(requireContext(), R.raw.c_2, 1),soundPool.load(requireContext(), R.raw.d_2, 1),soundPool.load(requireContext(), R.raw.e_2, 1),soundPool.load(requireContext(), R.raw.f_2, 1))
-                var sound= arrayOf(sound4,sound3,sound0,sound1,sound2)
-//            var sound= arrayOf(sound0)
                 row=2
 //
                 var prevData="0 0 0 0 0 0 0"
@@ -204,6 +210,8 @@ class DetailFragment : Fragment() {
         binding.disconnect.setOnClickListener {
             socketConnect=false
             SettingVariables.instanceExist=false
+            if(recording)
+                stopRecord()
             SocketHandler.closeConnection()
             val action =
                 DetailFragmentDirections.actionDetailFragmentToHomeFragment()

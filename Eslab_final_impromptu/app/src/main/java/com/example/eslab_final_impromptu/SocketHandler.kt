@@ -9,6 +9,7 @@ import java.lang.Thread.sleep
 import java.net.ServerSocket
 import java.net.Socket
 import java.net.URISyntaxException
+import java.util.concurrent.atomic.AtomicBoolean
 
 object SocketHandler {
     @Volatile
@@ -22,7 +23,7 @@ object SocketHandler {
     @Volatile
     lateinit var client:Socket
     @Volatile
-    private var connectionState=false
+    private var connectionState=AtomicBoolean(false)
     @Synchronized
     fun setSocket() {
         try {
@@ -40,7 +41,7 @@ object SocketHandler {
                 client = mSocket.accept()
                 SettingVariables.connected=true
                 Log.w("e","accept")
-                connectionState=true
+                connectionState.getAndSet(true)
                 output = PrintWriter(client.getOutputStream(), true)
                 input = BufferedReader(InputStreamReader(client.inputStream))
                 println(input)
@@ -48,7 +49,7 @@ object SocketHandler {
                 while(true)
                 {
 //                    Log.w("w", "reading")
-                    if(!connectionState)
+                    if(!connectionState.get())
                         break
                     rcvData=input.readLine()+" "+cnt.toString()
                     println(rcvData)
@@ -63,7 +64,7 @@ object SocketHandler {
     }
     @Synchronized
     fun getCState(): Boolean {
-        return connectionState
+        return connectionState.get()
     }
 
     fun readData():String {
@@ -74,12 +75,11 @@ object SocketHandler {
     fun closeConnection() {
         Log.d("ddddd","disconnect")
 //        mSocket.disconnect()
-        if(connectionState)
+        if(connectionState.get())
         {
-            connectionState=false
+            connectionState.getAndSet(false)
             client.close()
             rcvData=""
         }
-
     }
 }
